@@ -1,0 +1,575 @@
+{
+  "anger_ai.jpg": {
+    "human_responses": [
+      "Authoritative ",
+      "Sarcastic ",
+      "Mad",
+      "disappointed",
+      "concerned ",
+      "Angry",
+      "Angry",
+      "hard",
+      "annoyed"
+    ],
+    "ai_responses": ["Determined", "Intensity", "Intensity", "Determined."]
+  },
+  "anger.jpg": {
+    "human_responses": [
+      "Angry",
+      "Angsty",
+      "Angry",
+      "annoyed",
+      "angry ",
+      "Frustrated",
+      "Mad",
+      "angry",
+      "annoyed",
+      "cross"
+    ],
+    "ai_responses": ["Defiant", "Defiant", "Defiant", "Defiant"]
+  },
+  "boredom_ai.jpg": {
+    "human_responses": [
+      "Grave ",
+      "Intense ",
+      "Blank",
+      "judging",
+      "blank",
+      "Concentrated",
+      "Bored",
+      "stoic",
+      "disgusted"
+    ],
+    "ai_responses": ["Intense", "Intense", "Intense", "Serious"]
+  },
+  "boredom.jpg": {
+    "human_responses": [
+      "Irritated ",
+      "Confident ",
+      "Pensive",
+      "skeptical",
+      "boredom",
+      "Tired",
+      "Numb",
+      "in thought",
+      "romantic",
+      "neutral"
+    ],
+    "ai_responses": ["Pensive", "Pensive", "Thoughtful", "Pensive"]
+  },
+  "calmness_ai.jpg": {
+    "human_responses": [
+      "Stoic",
+      "Intense ",
+      "Pensive",
+      "neutral",
+      "blank",
+      "Serious",
+      "Blank",
+      "blank",
+      "nothing",
+      "focused"
+    ],
+    "ai_responses": ["Serious", "Serious", "Serious", "Serious"]
+  },
+  "calmness.jpg": {
+    "human_responses": [
+      "Relaxed",
+      "Peaceful",
+      "Peaceful",
+      "relaxed",
+      "relaxed ",
+      "Serene",
+      "Relaxed",
+      "relaxed",
+      "calm",
+      "meditative"
+    ],
+    "ai_responses": ["Relaxed", "Serene", "Serene", "Serenity"]
+  },
+  "confusion_ai.jpg": {
+    "human_responses": [
+      "Sincere ",
+      "Intense ",
+      "Concerned",
+      "blank",
+      "Serious",
+      "Intimidating",
+      "blank",
+      "calm",
+      "neutral"
+    ],
+    "ai_responses": ["Intense", "Intense.", "Intense", "Intense"]
+  },
+  "confusion.jpg": {
+    "human_responses": [
+      "Surprised",
+      "Disheartened ",
+      "Hurt",
+      "hurt",
+      "confused ",
+      "Confused",
+      "Sad",
+      "thinking",
+      "guilty",
+      "questioning"
+    ],
+    "ai_responses": ["Distressed", "Discomfort", "Concerned", "Concerned"]
+  },
+  "curiosity_ai.jpg": {
+    "human_responses": [
+      "Solemn ",
+      "Content ",
+      "Interested",
+      "satisfied",
+      "content ",
+      "Inspired",
+      "satisfied",
+      "interested"
+    ],
+    "ai_responses": ["Confident", "Confident", "Confident", "Confident"]
+  },
+  "curiosity.jpg": {
+    "human_responses": [
+      "Pondering ",
+      "Curious",
+      "Confused",
+      "confused ",
+      "Confused",
+      "Confused",
+      "thoughtless",
+      "nothing"
+    ],
+    "ai_responses": ["Pensive", "Pensive", "Pensive", "Pensive"]
+  },
+  "disappointment_ai.jpg": {
+    "human_responses": [
+      "Serious ",
+      "Sly ",
+      "Intense",
+      "thinking",
+      "concentrated ",
+      "Concentrated",
+      "Serious",
+      "handsome",
+      "disgusted"
+    ],
+    "ai_responses": ["Intense", "Intense", "Intense", "Intense"]
+  },
+  "disappointment.jpg": {
+    "human_responses": [
+      "Grim ",
+      "Pensive ",
+      "Disapproving",
+      "concern",
+      "disgust ",
+      "Disappointed",
+      "Upset",
+      "sad",
+      "hostile",
+      "concerned"
+    ],
+    "ai_responses": ["Resilient", "Reflective", "Pensive", "Resilience"]
+  },
+  "disgust_ai.jpg": {
+    "human_responses": [
+      "Confused",
+      "Surprised ",
+      "Confused",
+      "disgusted",
+      "disgust ",
+      "surprised",
+      "Confused",
+      "confused",
+      "Angry",
+      "worried"
+    ],
+    "ai_responses": ["Confused", "Skeptical", "Confused", "Skeptical"]
+  },
+  "disgust.jpg": {
+    "human_responses": [
+      "Disgust ",
+      "Disgusted ",
+      "Disgusted",
+      "disgusted",
+      "disgust ",
+      "Angry",
+      "Confused",
+      "disgusted",
+      "disgusted"
+    ],
+    "ai_responses": ["Disapproval", "Annoyed", "Disapproval", "Displeased"]
+  },
+  "excitement_ai.jpg": {
+    "human_responses": [
+      "Excitement ",
+      "Happy",
+      "Excited",
+      "elated",
+      "ecstatic ",
+      "Excited",
+      "Excited",
+      "happy",
+      "joyful",
+      "delighted"
+    ],
+    "ai_responses": ["Joyful", "Joyful", "Joyful", "Joyful"]
+  },
+  "excitement.jpg": {
+    "human_responses": [
+      "Free",
+      "Happy",
+      "Giggly",
+      "happy",
+      "joy",
+      "Happy",
+      "Joyful",
+      "glee",
+      "satisfied",
+      "happy"
+    ],
+    "ai_responses": ["Joyful", "Joyful", "Joyful", "Joyful"]
+  },
+  "fear_ai.jpg": {
+    "human_responses": [
+      "Shock ",
+      "Shocked ",
+      "Shocked",
+      "scared",
+      "shocked",
+      "Shocked",
+      "Shocked",
+      "suprised",
+      "scared"
+    ],
+    "ai_responses": ["Surprised", "Shock", "Shocked.", "Shocked"]
+  },
+  "fear.jpg": {
+    "human_responses": [
+      "Apprehension ",
+      "Shy",
+      "Frustrated",
+      "disgusted",
+      "anger ",
+      "Scared",
+      "Disgusted",
+      "dissatisfied",
+      "disgusted",
+      "rejection"
+    ],
+    "ai_responses": ["Distress", "Fearful", "Fear", "Distress"]
+  },
+  "gratitude_ai.jpg": {
+    "human_responses": [
+      "Profound ",
+      "Joyous ",
+      "Touched",
+      "empathetic",
+      "gratitude ",
+      "Enjoyable",
+      "compassio",
+      "thankful",
+      "grateful"
+    ],
+    "ai_responses": ["Joyful", "Joyful", "Joyful", "Joyful"]
+  },
+  "gratitude.jpg": {
+    "human_responses": [
+      "Free",
+      "Happy",
+      "Free",
+      "joyful",
+      "carefree ",
+      "Joyful",
+      "Carefree",
+      "content",
+      "peaceful",
+      "ecstatic"
+    ],
+    "ai_responses": ["Euphoria", "Liberation", "Liberated", "Liberation"]
+  },
+  "happiness_ai.jpg": {
+    "human_responses": [
+      "Happy",
+      "Content ",
+      "Happy",
+      "happy",
+      "happiness ",
+      "Content",
+      "Happy",
+      "happy",
+      "happy",
+      "happy"
+    ],
+    "ai_responses": ["Joyful", "Joyful", "Joyful", "Joyful"]
+  },
+  "happiness.jpg": {
+    "human_responses": [
+      "Happy",
+      "Happy",
+      "Happy",
+      "happy",
+      "happiness ",
+      "Happy",
+      "Smiley",
+      "happy",
+      "delighted"
+    ],
+    "ai_responses": ["Joyful", "Joyful", "Joyful", "Joyful"]
+  },
+  "hate_ai.jpg": {
+    "human_responses": [
+      "Fear",
+      "Disgusted ",
+      "Angry",
+      "angry?",
+      "anger ",
+      "Infuriated",
+      "Frightened",
+      "angry",
+      "obnoxious",
+      "angry"
+    ],
+    "ai_responses": ["Aggression", "Anger", "Anger", "Anger"]
+  },
+  "hate.jpg": {
+    "human_responses": [
+      "Frustrated",
+      "Angry ",
+      "Ecstatic",
+      "frustrated ",
+      "energized",
+      "Frustrated",
+      "excited",
+      "excited",
+      "powerful"
+    ],
+    "ai_responses": [
+      "Frustration",
+      "Frustration",
+      "Frustration",
+      "Frustration."
+    ]
+  },
+  "jealousy_ai.jpg": {
+    "human_responses": [
+      "Annoyed",
+      "Confused ",
+      "Disappointed",
+      "disgusted",
+      "upset ",
+      "Sad",
+      "Upset",
+      "sad",
+      "confused",
+      "worried"
+    ],
+    "ai_responses": ["Serious", "Serious", "Serious", "Serious"]
+  },
+  "jealousy.jpg": {
+    "human_responses": [
+      "Insecure",
+      "Angry ",
+      "Suspicious",
+      "skeptical",
+      "resentment ",
+      "Self concious",
+      "Stern",
+      "lost",
+      "nothing"
+    ],
+    "ai_responses": [
+      "Pensive",
+      "Introspective",
+      "Introspective",
+      "Introspective"
+    ]
+  },
+  "loneliness_ai.jpg": {
+    "human_responses": [
+      "Inquisitive ",
+      "Observant",
+      "annoyed",
+      "focused ",
+      "Focused",
+      "Blank",
+      "blank",
+      "disgusted",
+      "pensive"
+    ],
+    "ai_responses": ["Pensive", "Reflective", "Serious", "Introspective"]
+  },
+  "loneliness.jpg": {
+    "human_responses": [
+      "Depressed",
+      "Depressed",
+      "Depressed",
+      "sad",
+      "sadness ",
+      "Sad",
+      "Depressed",
+      "sad",
+      "gloomy",
+      "sad"
+    ],
+    "ai_responses": [
+      "Melancholy",
+      "The one word that describes the emotion in this photo best is \"melancholy.\"",
+      "Melancholy",
+      "Melancholy"
+    ]
+  },
+  "pride_ai.jpg": {
+    "human_responses": [
+      "Proud ",
+      "Proud ",
+      "Proud",
+      "confident",
+      "pride ",
+      "Proud",
+      "Proud",
+      "proud",
+      "proud",
+      "puffy"
+    ],
+    "ai_responses": ["Contentment", "Confident", "Confident", "Confident"]
+  },
+  "pride.jpg": {
+    "human_responses": [
+      "Pretentious ",
+      "Proud",
+      "Confident",
+      "confident",
+      "determination ",
+      "Determined",
+      "Narcissistic",
+      "proud",
+      "proud",
+      "proud"
+    ],
+    "ai_responses": [
+      "Contemplative",
+      "Contemplative",
+      "Contemplative",
+      "Contemplative"
+    ]
+  },
+  "sadness.jpg": {
+    "human_responses": [
+      "Welcoming ",
+      "Confident ",
+      "Interested",
+      "interested",
+      "confused  ",
+      "Playful",
+      "Blank",
+      "handsome",
+      "confused",
+      "happy"
+    ],
+    "ai_responses": ["Distress", "Distressed", "Distress", "Distressed"]
+  },
+  "relief_ai.jpg": {
+    "human_responses": [
+      "Overjoyed ",
+      "Glad ",
+      "Ecstatic",
+      "elated",
+      "accomplished ",
+      "Relieved",
+      "Accomplished ",
+      "happy",
+      "proud",
+      "pleased"
+    ],
+    "ai_responses": ["Confident", "Confident", "Confidence", "Confident"]
+  },
+  "satisfaction.jpg": {
+    "human_responses": [
+      "Sad",
+      "Upset ",
+      "Upset",
+      "concern",
+      "sadness ",
+      "Sad",
+      "Sad",
+      "sad",
+      "curious",
+      "worried"
+    ],
+    "ai_responses": ["Joyful.", "Joyful", "Joyful", "Joyful"]
+  },
+  "sadness_ai.jpg": {
+    "human_responses": [
+      "Frustration ",
+      "Stressed ",
+      "Distressed",
+      "anguish",
+      "despair ",
+      "Sad",
+      "Disappointed ",
+      "sad",
+      "Frustrated",
+      "anxious"
+    ],
+    "ai_responses": ["Concerned", "Concerned", "Concerned", "Concerned"]
+  },
+  "shame_ai.jpg": {
+    "human_responses": [
+      "Content ",
+      "Happy",
+      "Cordial",
+      "satisfied",
+      "smug ",
+      "Content",
+      "Blank",
+      "happy",
+      "happy"
+    ],
+    "ai_responses": ["Determined", "Determined", "Confident", "Determined"]
+  },
+  "satisfaction_ai.jpg": {
+    "human_responses": [
+      "Calm ",
+      "Giggly ",
+      "Happy",
+      "confident",
+      "happy ",
+      "Happy",
+      "Happy",
+      "nice",
+      "content",
+      "confident"
+    ],
+    "ai_responses": ["Confident", "Confident", "Confident", "Confident"]
+  },
+  "surprise_ai.jpg": {
+    "human_responses": [
+      "Curious ",
+      "Intense ",
+      "Concerned",
+      "concerned",
+      "inquisitive ",
+      "Skeptical",
+      "Disturbed",
+      "sad",
+      "disgusted"
+    ],
+    "ai_responses": ["Surprised", "Surprised", "Surprised", "Surprised"]
+  },
+  "surprise.jpg": {
+    "human_responses": [
+      "Tired",
+      "Disappointed ",
+      "Frustrated",
+      "frustrated",
+      "disappointment ",
+      "Disappointed",
+      "Disappointed ",
+      "broken",
+      "frustrated",
+      "pensive"
+    ],
+    "ai_responses": ["Amazement", "Surprise", "Surprise", "Surprise"]
+  }
+}
