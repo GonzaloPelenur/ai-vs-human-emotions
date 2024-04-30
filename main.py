@@ -35,7 +35,7 @@ model = genai.GenerativeModel('gemini-pro')
 model_vision = genai.GenerativeModel('gemini-pro-vision')
 client = OpenAI(api_key = OPENAI_API_KEY)
 
-glove_path = 'glove.6B.50d.txt'  # Specify the correct path to the GloVe file
+glove_path = 'vector-models/glove.6B.50d.txt'  # Specify the correct path to the GloVe file
 glove_model = KeyedVectors.load_word2vec_format(glove_path, binary=False, no_header=True)
 
 iter = 4 # amount of responses per AI on a single image
@@ -152,8 +152,6 @@ def main():
         print(results)
     print(results)
 
-glove_path = 'glove.6B.50d.txt'  # Specify the correct path to the GloVe file
-glove_model = KeyedVectors.load_word2vec_format(glove_path, binary=False, no_header=True)
 
 def get_vector(word):
     """Return the vector for a word from the GloVe model, handle missing words safely."""
@@ -161,7 +159,87 @@ def get_vector(word):
         return glove_model[word]
     except KeyError:
         return np.zeros(glove_model.vector_size)
+    
+def check_vectors():
+    word = "shock"
+    print(get_vector(word))
+    vector1 = get_vector("shock")
+    vectors = []
+    for x in range(20):
+        vectors.append(get_vector(word))
+    for vector in vectors:
+        print(euclidean(vector1, vector))
+        print(vector1 == vector)
 
+def plot_responses2(data):
+    for image_name, responses in data.items():
+        unique_words = set()
+        human_words = [word.lower().split(".")[0] for word in responses['human_responses']]
+        ai_words = [word.lower().split(".")[0] for word in responses['ai_responses']]
+        unique_words.update([word.lower() for word in responses['human_responses']])
+        unique_words.update([word.lower() for word in responses['ai_responses']])
+        ground_truth = image_name.split(".")[0].split("_")[0].lower()
+        unique_words.add(ground_truth)
+
+        word_vectors = np.array([get_vector(word) for word in unique_words])
+        # Adjust perplexity to be less than the number of samples but not less than 5
+        perplexity_value = min(len(word_vectors) - 1, 30)  # Default perplexity is often 30
+        perplexity_value = max(perplexity_value, 5)  # Ensure it's at least 5 for meaningful results
+
+        tsne = TSNE(n_components=2, perplexity=perplexity_value, random_state=42)
+        vectors_2d = tsne.fit_transform(word_vectors)
+        word_to_2dvector = {}
+        for i, word in enumerate(unique_words):
+            word_to_2dvector[word] = vectors_2d[i]
+
+        plt.figure(figsize=(10, 10))
+        repeated_words = {}
+        used_coords = {}
+        for word in human_words:
+            s = 100
+            if word in repeated_words:
+                s = 150 * repeated_words[word] + 1
+            plt.scatter(word_to_2dvector[word][0], word_to_2dvector[word][1], color='blue', s=s)
+            if word not in repeated_words:
+                text_offset = 0
+                text = f"human: {word}"
+                if str(word_to_2dvector[word]) in used_coords:
+                    text_offset = 100*used_coords[str(word_to_2dvector[word])]
+                    text = f", {word}"
+                plt.annotate(text, 
+                xy=(word_to_2dvector[word][0], word_to_2dvector[word][1]), 
+                xytext=(text_offset, -20),  # Shifts text by 10 points down
+                textcoords='offset points',  # Uses offset in points
+                ha='center') 
+                used_coords[str(word_to_2dvector[word])] = used_coords.get(str(word_to_2dvector[word]), 0) + 1
+            repeated_words[word] = repeated_words.get(word, 0) + 1
+        repeated_words = {}
+        used_coords = {}
+        for word in ai_words:
+            plt.scatter(word_to_2dvector[word][0], word_to_2dvector[word][1], color='red')
+            if word not in repeated_words:
+                text_offset = 0
+                text = f"ai: {word}"
+                if str(word_to_2dvector[word]) in used_coords:
+                    text_offset = 100*used_coords[str(word_to_2dvector[word])]
+                    text = f", {word}"
+                plt.annotate(text, 
+                xy=(word_to_2dvector[word][0], word_to_2dvector[word][1]), 
+                xytext=(text_offset, -10),  # Shifts text by 10 points down
+                textcoords='offset points',  # Uses offset in points
+                ha='center') 
+                used_coords[str(word_to_2dvector[word])] = used_coords.get(str(word_to_2dvector[word]), 0) + 1
+            repeated_words[word] = repeated_words.get(word, 0) + 1
+        plt.scatter(word_to_2dvector[ground_truth][0], word_to_2dvector[ground_truth][1], color='green', s=100) 
+        plt.annotate(f"ground truth: {ground_truth}", xy=(word_to_2dvector[ground_truth][0], word_to_2dvector[ground_truth][1]),xytext=(0, 10),  # Shifts text by 10 points down
+                textcoords='offset points',  # Uses offset in points
+                ha='center')
+        plt.title(image_name)
+        plt.legend()
+        plt.grid(True)
+        # plt.show()
+        plt.savefig(f"plots2/{image_name}-vectors.png")
+        # exit()
 def plot_responses(data):
     # Collect all unique words
     unique_words = set()
@@ -169,6 +247,8 @@ def plot_responses(data):
         unique_words.update([word.lower() for word in responses['human_responses']])
         unique_words.update([word.lower() for word in responses['ai_responses']])
         unique_words.add(image_name.split(".")[0].split("_")[0].lower())
+    print(unique_words)
+    exit()
 
     # Map words to vectors
     word_vectors = np.array([get_vector(word) for word in unique_words])
@@ -282,8 +362,9 @@ def load_data():
 if __name__ == "__main__":
     # main()
     data = load_data()
-    # plot_responses(data)
-    calculate_distances_and_plot(data)
+    plot_responses2(data)
+    # calculate_distances_and_plot(data)
+    # check_vectors()
 
 """
 {'anger_ai.jpg': {'human_responses': ['Authoritative ', 'Sarcastic ', 'Mad', 'disappointed', 'concerned ', 'Angry', 'Angry', 'hard', 'annoyed'], 'ai_responses': []}, 'anger.jpg': {'human_responses': ['Angry', 'Angsty', 'Angry', 'annoyed', 'angry ', 'Frustrated', 'Mad', 'angry', 'annoyed', 'cross'], 'ai_responses': []}, 'boredom_ai.jpg': {'human_responses': ['Grave ', 'Intense ', 'Blank', 'judging', 'blank', 'Concentrated', 'Bored', 'stoic', 'disgusted'], 'ai_responses': []}, 'boredom.jpg': {'human_responses': ['Irritated ', 'Confident ', 'Pensive', 'skeptical', 'boredom', 'Tired', 'Numb', 'in thought', 'romantic', 'neutral'], 'ai_responses': []}, 'calmness_ai.jpg': {'human_responses': ['Stoic', 'Intense ', 'Pensive', 'neutral', 'blank', 'Serious', 'Blank', 'blank', 'nothing', 'focused'], 'ai_responses': []}, 'calmness.jpg': {'human_responses': ['Relaxed', 'Peaceful', 'Peaceful', 'relaxed', 'relaxed ', 'Serene', 'Relaxed', 'relaxed', 'calm', 'meditative'], 'ai_responses': []}, 'confusion_ai.jpg': {'human_responses': ['Sincere ', 'Intense ', 'Concerned', 'blank', 'Serious', 'Intimidating', 'blank', 'calm', 'neutral'], 'ai_responses': []}, 'confusion.jpg': {'human_responses': ['Surprised', 'Disheartened ', 'Hurt', 'hurt', 'confused ', 'Confused', 'Sad', 'thinking', 'guilty', 'questioning'], 'ai_responses': []}, 'curiosity_ai.jpg': {'human_responses': ['Solemn ', 'Content ', 'Interested', 'satisfied', 'content ', 'Inspired', 'satisfied', 'interested'], 'ai_responses': []}, 'curiosity.jpg': {'human_responses': ['Pondering ', 'Curious', 'Confused', 'confused ', 'Confused', 'Confused', 'thoughtless', 'nothing'], 'ai_responses': []}, 'disappointment_ai.jpg': {'human_responses': ['Serious ', 'Sly ', 'Intense', 'thinking', 'concentrated ', 'Concentrated', 'Serious', 'handsome', 'disgusted'], 'ai_responses': []}, 'disappointment.jpg': {'human_responses': ['Grim ', 'Pensive ', 'Disapproving', 'concern', 'disgust ', 'Disappointed', 'Upset', 'sad', 'hostile', 'concerned'], 'ai_responses': []}, 'disgust_ai.jpg': {'human_responses': ['Confused', 'Surprised ', 'Confused', 'disgusted', 'disgust ', 'surprised', 'Confused', 'confused', 'Angry', 'worried'], 'ai_responses': []}, 'disgust.jpg': {'human_responses': ['Disgust ', 'Disgusted ', 'Disgusted', 'disgusted', 'disgust ', 'Angry', 'Confused', 'disgusted', 'disgusted'], 'ai_responses': []}, 'excitement_ai.jpg': {'human_responses': ['Excitement ', 'Happy', 'Excited', 'elated', 'ecstatic ', 'Excited', 'Excited', 'happy', 'joyful', 'delighted'], 'ai_responses': []}, 'excitement.jpg': {'human_responses': ['Free', 'Happy', 'Giggly', 'happy', 'joy', 'Happy', 'Joyful', 'glee', 'satisfied', 'happy'], 'ai_responses': []}, 'fear_ai.jpg': {'human_responses': ['Shock ', 'Shocked ', 'Shocked', 'scared', 'shocked', 'Shocked', 'Shocked', 'suprised', 'scared'], 'ai_responses': []}, 'fear.jpg': {'human_responses': ['Apprehension ', 'Shy', 'Frustrated', 'disgusted', 'anger ', 'Scared', 'Disgusted', 'dissatisfied', 'disgusted', 'rejection'], 'ai_responses': []}, 'gratitude_ai.jpg': {'human_responses': ['Profound ', 'Joyous ', 'Touched', 'empathetic', 'gratitude ', 'Enjoyable', 'compassio', 'thankful', 'grateful'], 'ai_responses': []}, 'gratitude.jpg': {'human_responses': ['Free', 'Happy', 'Free', 'joyful', 'carefree ', 'Joyful', 'Carefree', 'content', 'peaceful', 'ecstatic'], 'ai_responses': []}, 'happiness_ai.jpg': {'human_responses': ['Happy', 'Content ', 'Happy', 'happy', 'happiness ', 'Content', 'Happy', 'happy', 'happy', 'happy'], 'ai_responses': []}, 'happiness.jpg': {'human_responses': ['Happy', 'Happy', 'Happy', 'happy', 'happiness ', 'Happy', 'Smiley', 'happy', 'delighted'], 'ai_responses': []}, 'hate_ai.jpg': {'human_responses': ['Fear', 'Disgusted ', 'Angry', 'angry?', 'anger ', 'Infuriated', 'Frightened', 'angry', 'obnoxious', 'angry'], 'ai_responses': []}, 'hate.jpg': {'human_responses': ['Frustrated', 'Angry ', 'Ecstatic', 'frustrated ', 'energized', 'Frustrated', 'excited', 'excited', 'powerful'], 'ai_responses': []}, 'jealousy_ai.jpg': {'human_responses': ['Annoyed', 'Confused ', 'Disappointed', 'disgusted', 'upset ', 'Sad', 'Upset', 'sad', 'confused', 'worried'], 'ai_responses': []}, 'jealousy.jpg': {'human_responses': ['Insecure', 'Angry ', 'Suspicious', 'skeptical', 'resentment ', 'Self concious', 'Stern', 'lost', 'nothing'], 'ai_responses': []}, 'loneliness_ai.jpg': {'human_responses': ['Inquisitive ', 'Observant', 'annoyed', 'focused ', 'Focused', 'Blank', 'blank', 'disgusted', 'pensive'], 'ai_responses': []}, 'loneliness.jpg': {'human_responses': ['Depressed', 'Depressed', 'Depressed', 'sad', 'sadness ', 'Sad', 'Depressed', 'sad', 'gloomy', 'sad'], 'ai_responses': []}, 'pride_ai.jpg': {'human_responses': ['Proud ', 'Proud ', 'Proud', 'confident', 'pride ', 'Proud', 'Proud', 'proud', 'proud', 'puffy'], 'ai_responses': []}, 'pride.jpg': {'human_responses': ['Pretentious ', 'Proud', 'Confident', 'confident', 'determination ', 'Determined', 'Narcissistic', 'proud', 'proud', 'proud'], 'ai_responses': []}, 'sadness.jpg': {'human_responses': ['Welcoming ', 'Confident ', 'Interested', 'interested', 'confused  ', 'Playful', 'Blank', 'handsome', 'confused', 'happy'], 'ai_responses': []}, 'relief_ai.jpg': {'human_responses': ['Overjoyed ', 'Glad ', 'Ecstatic', 'elated', 'accomplished ', 'Relieved', 'Accomplished ', 'happy', 'proud', 'pleased'], 'ai_responses': []}, 'satisfaction.jpg': {'human_responses': ['Sad', 'Upset ', 'Upset', 'concern', 'sadness ', 'Sad', 'Sad', 'sad', 'curious', 'worried'], 'ai_responses': []}, 'sadness_ai.jpg': {'human_responses': ['Frustration ', 'Stressed ', 'Distressed', 'anguish', 'despair ', 'Sad', 'Disappointed ', 'sad', 'Frustrated', 'anxious'], 'ai_responses': []}, 'shame_ai.jpg': {'human_responses': ['Content ', 'Happy', 'Cordial', 'satisfied', 'smug ', 'Content', 'Blank', 'happy', 'happy'], 'ai_responses': []}, 'satisfaction_ai.jpg': {'human_responses': ['Calm ', 'Giggly ', 'Happy', 'confident', 'happy ', 'Happy', 'Happy', 'nice', 'content', 'confident'], 'ai_responses': []}, 'surprise_ai.jpg': {'human_responses': ['Curious ', 'Intense ', 'Concerned', 'concerned', 'inquisitive ', 'Skeptical', 'Disturbed', 'sad', 'disgusted'], 'ai_responses': []}, 'surprise.jpg': {'human_responses': ['Tired', 'Disappointed ', 'Frustrated', 'frustrated', 'disappointment ', 'Disappointed', 'Disappointed ', 'broken', 'frustrated', 'pensive'], 'ai_responses': []}}

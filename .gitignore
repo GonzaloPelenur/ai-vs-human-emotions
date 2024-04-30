@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 images/
 plots/
+plots2/
 archive/
 vector-models/
 # C extensions
